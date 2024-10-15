@@ -1,22 +1,21 @@
-from setuptools import find_packages,setup
-from typing import List 
+rom setuptools import setup, find_packages
 
-HYPEN_E_DOT='-e .'
-def get_requirements(file_pathL:str)->List[str]:
-    requirements=[]
-    with open(file_path) as file_obj:
-        requirements=file_obj.readlines()
-        requirements=[req.replace("\n","") for req in requirements]
-        if HYPEN_E_DOT in requirements:
-            requirements.remove(HYPEN_E_DOT)
+def get_requirements(file_name):
+    with open(file_name) as file_obj:
+        requirements = file_obj.readlines()
+        return [req.strip() for req in requirements]
 
-    return requirements
- 
 setup(
-name='NLP',
-version='0.0.1',
-author='MahmoudNasser',
-author_email='nass147472@gmail.com',
-packages=find_packages(),
-install_requries=get_requirements('requirements.txt')
+    name='SentimentAnalysisApp',
+    version='0.1.0',
+    author='Your Name',
+    author_email='your_email@example.com',
+    packages=find_packages(),
+    install_requires=get_requirements('requirements.txt'),
+    include_package_data=True,  # Include templates and static files
+    entry_points={
+        'console_scripts': [
+            'run-app=your_module_name:app.run',  # Replace 'your_module_name' with the actual module name where your Flask app is defined
+        ],
+    },
 )
